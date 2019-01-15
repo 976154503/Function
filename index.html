@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <title>demo</title>
+    <meta name="keywords" content="demo">
+    <meta name="description" content="demo">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+</head>
+
+<body>
+    <div class="wrap">
+        
+    </div>
+    <script>
+        
+        var arr = [1,1,1,1,2,,3,4,4,5,7,2,8];
+        Array.prototype.unique = function (){
+            var newArr = [];
+            var obj = {};
+            for( var i = 0;i < this.length; i++){
+                if(!obj[this[i]]){
+                    obj[this[i]] = 'test';
+                    newArr.push(this[i]);
+                }
+            }
+            return newArr;
+        }
+        var result = arr.unique();
+        console.log(result);
+    </script>
+</body>
+
+</html>
