@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <title>demo</title>
+    <meta name="keywords" content="demo">
+    <meta name="description" content="demo">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="dom">
+            <p>测试</p>
+            <p>测试</p>
+            <div id="test">測試</div>
+        </div>
+    </div>
+    <script>
+        //自定義事件
+        var dom = document.getElementById('test');
+        //方法一
+        //創建方法并初始化方法
+        // var selfEvent = new Event('self',function(){});
+        //监听
+        // document.addEventListener('self',function(){
+        //     alert(1);
+        // })
+        //觸發
+        // dom.addEventListener('click',function(){
+        //     document.dispatchEvent(selfEvent);
+        // })
+        //方法二 已废弃
+        //監聽
+        // document.addEventListener('self',function(){
+        //     alert(1);
+        // });
+        // //創建方法
+        // var selfEvent = document.createEvent('HTMLEvents');
+        // //初始化
+        // selfEvent.initEvent('self',false,false);
+        // //觸發
+        // document.dispatchEvent(selfEvent);
+        // document.addEventListener('ondataavailable', function (event) {
+        //     alert(event.eventType);
+        // }, false);
+        // var event = document.createEvent('HTMLEvents');
+        // event.initEvent("ondataavailable", true, true);
+        // event.eventType = 'message';
+        // document.dispatchEvent(event);
+
+        //自定義事件方法一
+        // var myEvent = new Event('selfEvent',function(){});
+        // document.addEventListener('selfEvent',function(){
+        //     alert('調用了自定義方法');
+        // });
+        // document.dispatchEvent(myEvent);
+        //自定义事件二  已废弃
+        document.addEventListener('selfEvent',function(){
+            alert('触发自定义方法二');
+        })
+        var myEvent = document.createEvent('HTMLEvents');
+        myEvent.initEvent('selfEvent',false,false);
+        document.dispatchEvent(myEvent);
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <title>demo</title>
+    <meta name="keywords" content="demo">
+    <meta name="description" content="demo">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="dom">
+            <p>测试</p>
+            <p>测试</p>
+            <div>測試</div>
+        </div>
+    </div>
+    <script>
+        //事件委托
+        var dom = document.getElementById('dom');
+        delegateEvent(dom, 'p', 'click', function () {
+            alert(1);
+        });
+
+        function delegateEvent(interfaceEle, selector, type, fn) {
+            if(interfaceEle.addEventListener){
+                interfaceEle.addEventListener(type,eventfn);
+            }else{
+                interfaceEle.attachEvent('on' + type,eventfn);
+            }
+
+            function eventfn(e){
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(matchSelector(target,selector)){
+                    if(fn){
+                        fn.call(target,e);
+                    }
+                }
+            }
+        }
+        function matchSelector(ele,selector){
+            if(selector.charAt(0) === '#'){
+                return ele.id == selector.slice(1);
+            }
+            if(selector.charAt(0) === '.'){
+                return (ele.className).indexOf(selector.slice(1)) != -1;
+            }
+            return ele.tagName.toLowerCase() == selector.toLowerCase();
+        }
+    </script>
+</body>
+
+</html>

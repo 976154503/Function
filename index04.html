@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <title>demo</title>
+    <meta name="keywords" content="demo">
+    <meta name="description" content="demo">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="dom">
+            <p>测试</p>
+            <p>测试</p>
+            <div id="test">測試</div>
+        </div>
+    </div>
+    <script>
+        //自定義事件
+        function EventTarget() {
+            this.events = {};
+        }
+        EventTarget.prototype = {
+            constructor: EventTarget,
+            addEvent: function(type,fn){
+                if (typeof this.events[type] == 'undefined') {
+                    this.events[type] = [];
+                }
+                this.events[type].push(fn);
+            },
+            dispatchEvent: function(event){
+                //模拟真实事件的event
+                if(!event.target){
+                    event.target = this;
+                }
+                //判断是否存在该事件类型
+                if(this.events[event.type] instanceof Array){
+                    var handlers = this.events[event.type];
+                    //在同一个事件类型下的可能存在多种处理事件，找出本次需要处理的事件
+                    for(var i = 0; i < handlers.length; i++){
+                        //执行触发
+                        handlers[i](event);
+                    }
+                }
+            },
+            removeEvent: function(type, fn){
+                //判断是否存在该事件类型
+                if(this.events[type] instanceof Array){
+                    var handlerfn = this.events[type];
+                    //在同一个事件类型下的可能存在多种处理事件
+                    for(var i = 0; i < handlerfn.length; i++){
+                        //找出本次需要处理的事件下标
+                        if(handlerfn[i] == fn){
+                            //从事件处理数组里面删除
+                            this.events[type].splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+                return this;
+            }
+        }
+        
+        
+        var target = new EventTarget();
+        var f1 = function(){
+            console.log('调用了封装好的自定义事件');
+        }
+        var f2 = function(){
+            console.log('调用了封装好的自定义事件2');
+        }
+        target.addEvent('eat',f1)
+        target.addEvent('eat',f2)
+        target.removeEvent('eat',f1)
+        target.removeEvent('eat',f2)
+        target.dispatchEvent({
+            type:'eat'
+        })
+        console.log(target.events);
+    </script>
+</body>
+
+</html>
