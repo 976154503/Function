@@ -110,5 +110,38 @@ var fun02 = function(){
 tag.addEvent('play',fun01);
 tag.addEvent('play',fun02);
 tag.dispatchEvent({type:'play'});
+
+//方法二
+var createEvent = new Event();
+createEvent.addEvent('play',function(){
+    alert('1');
+});
+createEvent.showEvent('play','fn1','fn2');
+function Event(){
+    this.events = {}
+}
+Event.prototype = {
+    contructor: Event,
+    addEvent: function(eventName, fn){
+        var fnArr = this.events[eventName] ? this.events[eventName] : [];
+        fnArr.push(fn);
+        this.events[eventName] = fnArr;
+    },
+    showEvent: function(eventName){
+        if(!this.events.hasOwnProperty(eventName)){
+            return;
+        }
+        var fnArr = this.events[eventName];
+        var args = Array.prototype.slice.call(arguments,1);
+        var _this = this;
+        fnArr.forEach(function(fn){
+            try{
+                fn.call(_this,args)
+            }catch(e){
+                console.log(e);
+            }
+        })
+    }
+}
 ```
 
