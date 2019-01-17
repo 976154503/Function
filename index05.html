@@ -37,6 +37,7 @@
                 var eventFnArr = this.events[eventName] ? this.events[eventName] : [];
                 eventFnArr.push(eventFn);
                 this.events[eventName] = eventFnArr;
+                //console.log(eventFn);
             },
             showEvent: function(eventName){
                 //通过方法名称查找 此方法名称是否存在
@@ -53,6 +54,7 @@
                     return
                 }
                 var _this = this;
+                
                 var args = Array.prototype.slice.call(arguments,1);
                 eventFnArr.forEach(function(fn){
                     try{
@@ -70,12 +72,22 @@
         }
         var emitter = new Event();
         emitter.addEvent("selfEvent",function(){
-            console.log('111');
+            //console.log(arguments);
+            Array.prototype.forEach.call(arguments, function(item) {
+                //console.log(item);
+            });
         });
         emitter.addEvent("selfEvent",function(){
-            console.log('222');
+            console.log('第二个方法');
         });
-        emitter.showEvent("selfEvent",'q','s');
+        emitter.addEvent("selfEvent",function(){
+            console.log('第三个方法');
+        });
+        emitter.addEvent("myEvent",function(){
+            console.log('第一个方法');
+        });
+        emitter.showEvent("selfEvent");
+        emitter.showEvent("myEvent");
     </script>
 </body>
 

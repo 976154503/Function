@@ -132,6 +132,9 @@ Event.prototype = {
             return;
         }
         var fnArr = this.events[eventName];
+        if(!Array.isArray(fnArr)){
+            return;
+        }
         var args = Array.prototype.slice.call(arguments,1);
         var _this = this;
         fnArr.forEach(function(fn){
