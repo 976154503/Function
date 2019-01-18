@@ -1,9 +1,8 @@
-## js面试题目总结
+## js题目总结
 
 + 数组去重
-  
+1. 方法一
 ```javascript
-
 var arr = [1,1,1,1,2,,3,4,4,5,7,2,8];
 Array.prototype.unique = function (){
     var newArr = [];
@@ -22,6 +21,12 @@ console.log(result);
 //运行结果
 [1, 2, undefined, 3, 4, 5, 7, 8]
 
+```
+2. 方法二
+```javascript
+var arr = [1, 1, 1, 3, 2, 2, 5, 5, 6, 6]
+var result = Array.from(new Set(arr));
+console.log(result);
 ```
 
 + 原生js实现事件代理/事件委托
@@ -146,5 +151,59 @@ Event.prototype = {
         })
     }
 }
+```
++ 数组排序 
+1. 冒泡排序
+```javascript
+var arr = [1,4,6,2,8,0,5];
+var result = function(arr){
+    for(var i = 0; i < arr.length - 1; i++){
+        for(var j = i + 1; j < arr.length; j++){
+            if(arr[i] > arr[j]){
+                var temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return arr;
+}
+console.log(result(arr));
+```
+2. 快速排序
+```javascript
+var arrDemo = [1,100,10,4,6,2,8,0,5];
+function quickSort(arr){
+    if(arr.length <= 1) return arr;
+    var left = [];
+    var right = [];
+    var middle = Math.floor(arr.length/2);
+    var midValue = arr.splice([middle],1)[0];
+    for(var i = 0; i < arr.length; i++){
+        if(arr[i] < midValue){
+            left.push(arr[i]);
+        }else{
+            right.push(arr[i]);
+        }
+    }
+    return quickSort(left).contact(middle,quickSort(right));
+}
+```
+3. 选择排序
+> 两个for循环嵌套，外循环记录每次循环开始的位置，内循环查找本次循环内的最小值；
+> 实质是每循环一次将查到的最小值放在每次循环的最初开始的位置
+
+4. 插入排序
+5. 希尔排序
+6. sort排序
+```javascript
+var arrDemo = [1,100,10,4,6,2,8,0,5];
+var result = arrDemo.sort(function(a,b){
+    //这里的核心思想需要思考
+    return a > b ? 1 : -1;
+});
+console.log(result);
+//运行结果
+[0, 1, 2, 4, 5, 6, 8, 10, 100]
 ```
 

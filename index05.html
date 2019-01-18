@@ -72,10 +72,8 @@
         }
         var emitter = new Event();
         emitter.addEvent("selfEvent",function(){
-            //console.log(arguments);
-            Array.prototype.forEach.call(arguments, function(item) {
-                //console.log(item);
-            });
+            console.log(arguments);
+            
         });
         emitter.addEvent("selfEvent",function(){
             console.log('第二个方法');
@@ -88,6 +86,7 @@
         });
         emitter.showEvent("selfEvent");
         emitter.showEvent("myEvent");
+        
     </script>
 </body>
 

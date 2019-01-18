@@ -24,25 +24,52 @@
         </div>
     </div>
     <script>
-        //数组去重
-        $('#dom').on('click', function(e){
-            console.log(e.currentTarget);
-            console.log(e.target);
-        })
+        //数组排序
 
-        var arr = [,1,1,1,2,2,3,9,9,1];
-        function arrsort(zom){
-            var brr = [];
-            var obj = {};
-            zom.forEach(function(item,index){
-                if(!obj[item]){
-                    obj[item] = 'asd';
-                    brr.push(item);
+        var arr = [1,4,6,2,8,0,5];
+        var times=0;
+        function quickSort(arr){
+            if (arr.length <= 1){return arr};
+            //floor() 方法执行的是向下取整计算，它返回的是小于或等于函数参数，并且与之最接近的整数。
+            var pivotIndex = Math.floor(arr.length / 2);
+            var pivot = arr.splice(pivotIndex,1)[0];
+            var left = [];
+            var right = [];
+            for (var i = 0; i < arr.length; i++){
+                if(arr[i] < pivot) {
+                    left.push(arr[i]);
+                }else{
+                    right.push(arr[i]);
                 }
-            });
-            return brr;
+            }
+            var timeInf = ++times;
+            // console.log("第"+timeInf+"次的中间值----："+pivot);
+            // console.log("第"+timeInf+"次排序后left----："+left);
+            // console.log("第"+timeInf+"次排序后right----："+right);
+            // console.log("第"+timeInf+"次排序后arr："+arr);
+            // console.log("第"+timeInf+"次排序后quickSortLeft："+quickSort(left));
+            // console.log("第"+timeInf+"次排序后quickSortRight："+quickSort(right));
+            return quickSort(left).concat([pivot],quickSort(right));
         }
-        console.log(arrsort(arr));
+        console.log('result:' + quickSort(arr));
+        var result = function(arr){
+            for(var i = 0; i < arr.length - 1; i++){
+                for(var j = i + 1; j < arr.length; j++){
+                    if(arr[i] > arr[j]){
+                        var temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+        //console.log(result(arr));
+        var arrDemo = [1,100,10,4,6,2,8,0,5];
+        var result = arrDemo.sort(function(a,b){
+            return a > b ? 1 : -1;
+        });
+        //console.log(result);
     </script>
 </body>
 
