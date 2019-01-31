@@ -186,7 +186,7 @@ function quickSort(arr){
             right.push(arr[i]);
         }
     }
-    return quickSort(left).contact(middle,quickSort(right));
+    return quickSort(left).concat([midValue],quickSort(right));
 }
 ```
 3. 选择排序
